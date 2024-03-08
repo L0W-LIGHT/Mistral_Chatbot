@@ -50,10 +50,11 @@ def display_chat_history(chain):
                 message(st.session_state["past"][i], is_user=True, key=str(i) + '_user', avatar_style="thumbs")
                 message(st.session_state["generated"][i], key=str(i), avatar_style="fun-emoji")
 
+
 def create_conversational_chain(vector_store):
     # Create llm
     llm = LlamaCpp(
-    streaming = True,
+   
     model_path="mistral-7b-instruct-v0.1.Q4_K_M.gguf",
     temperature=0.75,
     top_p=1, 
@@ -67,6 +68,8 @@ def create_conversational_chain(vector_store):
                                                  retriever=vector_store.as_retriever(search_kwargs={"k": 2}),
                                                  memory=memory)
     return chain
+
+
 
 def main():
     # Initialize session state
